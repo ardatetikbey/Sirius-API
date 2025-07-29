@@ -57,4 +57,187 @@ module SiriusApi
       return nil
     end
   end
+
+  def self.logout(token)
+    begin
+      uri = URIS[:logout]
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(uri.path, {
+        "Content-Type" => "application/json"
+      })
+
+      data = {
+        "token" => token,
+      }
+
+      request.body = data.to_json
+      response = http.request(request)
+
+      return response
+    rescue Exception => err
+      puts "Error: #{err}"
+      return nil
+    end
+  end
+
+  def self.refresh_token(token)
+    begin
+      uri = URIS[:refresh_token]
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(uri.path, {
+        "Content-Type" => "application/json"
+      })
+
+      data = {
+        "refreshToken" => token,
+      }
+
+      request.body = data.to_json
+      response = http.request(request)
+
+      return response
+    rescue Exception => err
+      puts "Error: #{err}"
+      return nil
+    end
+  end
+
+  def self.resend_activation(email)
+    begin
+      uri = URIS[:resend_activation]
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(uri.path, {
+        "Content-Type" => "application/json"
+      })
+
+      data = {
+        "email" => email,
+      }
+
+      request.body = data.to_json
+      response = http.request(request)
+
+      return response
+    rescue Exception => err
+      puts "Error: #{err}"
+      return nil
+    end
+  end
+
+  def self.forgot_password(email)
+    begin
+      uri = URIS[:forgot_password]
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(uri.path, {
+        "Content-Type" => "application/json"
+      })
+
+      data = {
+        "email" => email,
+      }
+
+      request.body = data.to_json
+      response = http.request(request)
+
+      return response
+    rescue Exception => err
+      puts "Error: #{err}"
+      return nil
+    end
+  end
+
+  def self.reset_password(token, password)
+    begin
+      uri = URIS[:reset_password]
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(uri.path, {
+        "Content-Type" => "application/json"
+      })
+
+      data = {
+        "token" => token,
+        "newPassword" => password,
+      }
+
+      request.body = data.to_json
+      response = http.request(request)
+
+      return response
+    rescue Exception => err
+      puts "Error: #{err}"
+      return nil
+    end
+  end
+  def self.activate_user(token)
+    begin
+      uri = URIS[:activate]
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(uri.path, {
+        "Content-Type" => "application/json"
+      })
+
+      data = {
+        "token" => token,
+      }
+
+      request.body = data.to_json
+      response = http.request(request)
+
+      return response
+    rescue Exception => err
+      puts "Error: #{err}"
+      return nil
+    end
+  end
+
+  def self.login(identifier, password)
+    begin
+      uri = URIS[:login]
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(uri.path, {
+        "Content-Type" => "application/json"
+      })
+
+      data = {
+        "identifier" => identifier,
+        "password" => password
+      }
+
+      request.body = data.to_json
+      response = http.request(request)
+
+      return response
+    rescue Exception => err
+      puts "Error: #{err}"
+      return nil
+    end
+  end
 end
