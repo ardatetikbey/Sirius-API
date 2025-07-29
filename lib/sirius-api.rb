@@ -58,32 +58,6 @@ module SiriusApi
     end
   end
 
-  def self.logout(token)
-    begin
-      uri = URIS[:logout]
-
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-      request = Net::HTTP::Post.new(uri.path, {
-        "Content-Type" => "application/json"
-      })
-
-      data = {
-        "token" => token,
-      }
-
-      request.body = data.to_json
-      response = http.request(request)
-
-      return response
-    rescue Exception => err
-      puts "Error: #{err}"
-      return nil
-    end
-  end
-
   def self.refresh_token(token)
     begin
       uri = URIS[:refresh_token]
@@ -98,6 +72,32 @@ module SiriusApi
 
       data = {
         "refreshToken" => token,
+      }
+
+      request.body = data.to_json
+      response = http.request(request)
+
+      return response
+    rescue Exception => err
+      puts "Error: #{err}"
+      return nil
+    end
+  end
+
+  def self.logout(token)
+    begin
+      uri = URIS[:logout]
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(uri.path, {
+        "Content-Type" => "application/json"
+      })
+
+      data = {
+        "token" => token,
       }
 
       request.body = data.to_json
